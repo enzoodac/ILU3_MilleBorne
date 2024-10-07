@@ -34,7 +34,7 @@ public class JeuDeCartes {
 		return jeu.toString();
 	}
 
-	public Carte[] getToutesLesCartes() {
+	public Carte[] donnerCartes() {
 		int nbCartesConfig = 0;
 		for (Configuration config : typesDeCartes) {
 			nbCartesConfig += config.getnbExemplaires();
@@ -50,6 +50,16 @@ public class JeuDeCartes {
 
 		}
 		return cartes;
+	}
+
+	public boolean CheckCount() {
+		int nbExpected = 106;
+		int actualCount = 0;
+		for (Configuration configuration : typesDeCartes) {
+			actualCount += configuration.getnbExemplaires();
+		}
+
+		return nbExpected == actualCount;
 	}
 
 	public class Configuration {
