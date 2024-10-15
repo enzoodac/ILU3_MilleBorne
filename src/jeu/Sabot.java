@@ -45,11 +45,11 @@ public class Sabot<T extends Carte> implements Iterable<T> {
 		if (!iter.hasNext()) {
 			throw new NoSuchElementException("Pioche interdite dans un sabot vide !");
 		}
-		//System.out.println(iter.next());
+		// System.out.println(iter.next());
 		T carte = iter.next();
 		System.out.println("Je pioche " + carte.toString());
 		iter.remove();
-		
+
 		return carte;
 
 	}
@@ -62,11 +62,12 @@ public class Sabot<T extends Carte> implements Iterable<T> {
 		private boolean nextEffectue = false;
 		private int indiceIterateur = 0;
 		private int nombreOperationReference = nombreOperations;
-		
+
 		@Override
 		public boolean hasNext() {
 			return indiceIterateur < nbCartes;
 		}
+
 		@Override
 		public T next() {
 			verificationConcurrence();
@@ -80,6 +81,7 @@ public class Sabot<T extends Carte> implements Iterable<T> {
 			}
 
 		}
+
 		@Override
 		public void remove() {
 			verificationConcurrence();
@@ -87,7 +89,7 @@ public class Sabot<T extends Carte> implements Iterable<T> {
 				throw new NoSuchElementException();
 			}
 			// decalage des elements pour supprimer l'element souhaite
-			for (int i = indiceIterateur-1; i < nbCartes - 1; i++) {
+			for (int i = indiceIterateur - 1; i < nbCartes - 1; i++) {
 				cartes[i] = cartes[i + 1];
 
 			}
@@ -97,8 +99,6 @@ public class Sabot<T extends Carte> implements Iterable<T> {
 			indiceIterateur--;
 			nombreOperations++;
 			nombreOperationReference++;
-			
-			
 
 		}
 

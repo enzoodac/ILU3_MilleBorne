@@ -52,7 +52,7 @@ public class JeuDeCartes {
 		return cartes;
 	}
 
-	public boolean CheckCount() {
+	public boolean checkCount() {
 		int nbExpected = 106;
 		int actualCount = 0;
 		for (Configuration configuration : typesDeCartes) {
@@ -61,6 +61,8 @@ public class JeuDeCartes {
 
 		return nbExpected == actualCount;
 	}
+
+
 
 	public class Configuration {
 		private int nbExemplaires;
