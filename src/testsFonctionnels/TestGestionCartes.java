@@ -60,7 +60,7 @@ public class TestGestionCartes {
 		listeCartes = GestionCartes.rassembler(listeCartes);
 		System.out.println(listeCartes);
 		System.out.println("liste rassemblée sans erreur ? " + GestionCartes.verifierRassemblement(listeCartes));
-		List<Integer> listeInt= new ArrayList<>();
+		List<Integer> listeInt = new ArrayList<>();
 		listeInt.add(1);
 		listeInt.add(4);
 		listeInt.add(3);
