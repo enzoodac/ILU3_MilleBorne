@@ -47,7 +47,7 @@ public class Sabot<T extends Carte> implements Iterable<T> {
 		}
 		// System.out.println(iter.next());
 		T carte = iter.next();
-		System.out.println("Je pioche " + carte.toString());
+		//System.out.println("Je pioche " + carte.toString());
 		iter.remove();
 
 		return carte;

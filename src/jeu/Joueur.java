@@ -90,7 +90,6 @@ public class Joueur {
 			if (coup.estValide())
 				setCoups.add(coup);
 		}
-		System.out.println("Taille = " + setCoups.size());
 
 		return setCoups;
 	}
@@ -102,12 +101,11 @@ public class Joueur {
 	private Coup choixRandom(Set<Coup> coups) {
 		Coup coup = null;
 		int size = coups.size();
-		System.out.println("size = " + size);
 		Random random = new Random();
 		int randomChoice = random.nextInt(size) + 1;
 		Iterator<Coup> iterator = coups.iterator();
 		int i = 0;
-		while (i < size && iterator.hasNext()) {
+		while (i < randomChoice && iterator.hasNext()) {
 			coup = iterator.next();
 			i++;
 		}
@@ -118,11 +116,9 @@ public class Joueur {
 		Set<Coup> coupsPossibles = coupsPossibles(participants);
 		Set<Coup> coupsDefausse = coupsDefausse();
 		if (coupsPossibles.isEmpty()) {
-			System.out.println("choixRandom(coupsDefausse)");
 			return choixRandom(coupsDefausse);
-			
+
 		} else {
-			System.out.println("choixRandom(coupsPossibles)");
 			return choixRandom(coupsPossibles);
 		}
 	}

@@ -16,11 +16,11 @@ public class TestJeu {
 		Joueur luffy = new Joueur("Luffy", zoneLuffy);
 		
 		jeu.inscrire(jack, bill, luffy);
-		
 		jeu.distribuerCartes();
 		jeu.jouerTour(jack);
 		jeu.jouerTour(bill);
 		jeu.jouerTour(luffy);
+		
 
 	}
 

@@ -23,7 +23,11 @@ public class Jeu {
 		sabot = new Sabot();
 		
 		Carte[] cartesMelangees = listeCartes.toArray(new Carte[0]);
+		for (int i = 0; i < cartesMelangees.length; i++) {
+			System.out.println(listeCartes.get(i).toString());
+		}
 		for (Carte carte : cartesMelangees) {
+			System.out.println("carte == " + carte.toString());
 			sabot.ajouterCarte(carte);
 		}
 	}
@@ -46,7 +50,7 @@ public class Jeu {
 		StringBuilder chaine = new StringBuilder();
 		Carte carte = joueur.prendreCarte(sabot);
 		chaine.append(
-				"Le joueur " + joueur.getNom() + " a pioche " + carte.toString() + joueur.getMain().toString() + "\n");
+				"Le joueur " + joueur.getNom() + " a pioche " + carte.toString() + "\n" + joueur.getMain().toString() + "\n");
 		chaine.append(joueur.getNom() + " depose la carte " + carte.toString() + " dans ");
 		Coup coup = joueur.choisirCoup(joueurs);
 		joueur.retirerDeLaMain(carte);
@@ -59,7 +63,7 @@ public class Jeu {
 			joueurCible.deposer(carte);
 			chaine.append("dans la zone de jeu de " + joueurCible.getNom());
 		}
-
+		System.out.println(chaine.toString());
 		return chaine.toString();
 	}
 

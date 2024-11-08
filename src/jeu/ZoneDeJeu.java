@@ -20,10 +20,11 @@ public class ZoneDeJeu {
 		bottes = new HashSet<Botte>();
 
 	}
+
 	public HashSet<Botte> getBottes() {
 		return bottes;
 	}
-	
+
 	public List<Bataille> getBatailles() {
 		return batailles;
 	}
@@ -53,18 +54,22 @@ public class ZoneDeJeu {
 	}
 
 	public void deposer(Carte c) {
+
 		// System.out.println("Deposer carte " + c.toString());
 		switch (c) {
 		case Borne borne:
 			bornes.addFirst(borne);
+
 			break;
 
 		case Limite limite:
 			limites.addFirst(limite);
+			
 			break;
 
 		case Bataille bataille:
 			batailles.addFirst(bataille);
+	
 			break;
 		case Botte botte:
 			bottes.add(botte);
@@ -166,7 +171,5 @@ public class ZoneDeJeu {
 
 		return false;
 	}
-	
-	
 
 }

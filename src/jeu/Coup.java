@@ -7,15 +7,12 @@ public class Coup {
 	private Joueur joueurCourant;
 	private Joueur joueurCible;
 	private Carte carteJouee;
-	private boolean gotSabot = false;
 
 	public Coup(Joueur joueurCourant, Joueur joueurCible, Carte carteJouee) {
 		this.joueurCourant = joueurCourant;
+		this.joueurCible = joueurCible;
 		this.carteJouee = carteJouee;
-		if (joueurCible == null)
-			gotSabot = true;
-		else
-			this.joueurCible = joueurCible;
+
 	}
 
 	public Joueur getJoueurCourant() {
@@ -32,7 +29,12 @@ public class Coup {
 
 	public boolean estValide() {
 
-		return (carteJouee instanceof Attaque || carteJouee instanceof DebutLimite);
+		if (carteJouee instanceof Attaque || carteJouee instanceof DebutLimite) {
+			return !(joueurCible == null);
+		} else {
+			return true;
+		}
+
 	}
 
 	@Override
