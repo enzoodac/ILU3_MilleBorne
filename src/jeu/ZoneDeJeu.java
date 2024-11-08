@@ -20,9 +20,16 @@ public class ZoneDeJeu {
 		bottes = new HashSet<Botte>();
 
 	}
+	public HashSet<Botte> getBottes() {
+		return bottes;
+	}
+	
+	public List<Bataille> getBatailles() {
+		return batailles;
+	}
 
 	public boolean estPrioritaire() {
-		return bottes.contains(new Botte(Type.FEU));
+		return bottes.contains(Cartes.prioritaire);
 	}
 
 	public int donnerLimitationVitesse() {
@@ -61,6 +68,7 @@ public class ZoneDeJeu {
 			break;
 		case Botte botte:
 			bottes.add(botte);
+			break;
 		default:
 			throw new ClassCastException();
 
@@ -68,19 +76,27 @@ public class ZoneDeJeu {
 	}
 
 	public boolean peutAvancer() {
-		
-		Bataille sommetBatailles = batailles.getFirst();
-		System.out.println("HERE!!");
-		boolean cond1 = batailles.isEmpty() && estPrioritaire();
-		
-		boolean cond2 = sommetBatailles instanceof Parade && sommetBatailles.getType().equals(Type.FEU);
-		boolean cond3 = sommetBatailles instanceof Parade && estPrioritaire();
-		boolean cond4 = sommetBatailles instanceof Attaque && sommetBatailles.getType().equals(Type.FEU)
-				&& estPrioritaire();
-		boolean cond5 = sommetBatailles instanceof Attaque && bottes.contains(new Botte(sommetBatailles.getType()))
-				&& estPrioritaire();
 
-		return cond1 || cond2 || cond3 || cond4 || cond5;
+		if (batailles.isEmpty()) {
+			return estPrioritaire();
+
+		}
+
+		Bataille sommetBatailles = batailles.getFirst();
+		if (sommetBatailles instanceof Parade) {
+			if (sommetBatailles.getType().equals(Type.FEU))
+				return true;
+			if (estPrioritaire())
+				return true;
+		}
+		if (sommetBatailles instanceof Attaque) {
+			if (sommetBatailles.getType().equals(Type.FEU) && estPrioritaire())
+				return true;
+			if (bottes.contains(new Botte(sommetBatailles.getType())) && estPrioritaire())
+				return true;
+		}
+
+		return false;
 	}
 
 	private boolean estDepotFeuVertAutorise() {
@@ -114,17 +130,17 @@ public class ZoneDeJeu {
 	}
 
 	private boolean estDepotBatailleAutorise(Bataille bataille) {
-		
-		if (bottes.contains(new Botte(bataille.getType()))) {  				
-			
+
+		if (bottes.contains(new Botte(bataille.getType()))) {
+
 			return false;
 		}
-		
+
 		if (bataille instanceof Attaque && peutAvancer()) {
-			
+
 			return true;
 		}
-			
+
 		else if (bataille instanceof Parade) {
 			if (bataille.equals(Cartes.feuVert)) {
 				return estDepotFeuVertAutorise();
@@ -150,5 +166,7 @@ public class ZoneDeJeu {
 
 		return false;
 	}
+	
+	
 
 }

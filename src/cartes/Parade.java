@@ -11,7 +11,7 @@ public class Parade extends Bataille {
 		return getType().getNomParade();
 
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		if (obj instanceof Parade) {
@@ -20,4 +20,5 @@ public class Parade extends Bataille {
 		}
 		return false;
 	}
+
 }

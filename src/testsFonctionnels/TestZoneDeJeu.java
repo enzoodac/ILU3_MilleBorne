@@ -25,19 +25,19 @@ public class TestZoneDeJeu {
 
 		// TP3 PARTIE 2
 //		ZoneDeJeu zoneDeJeu = new ZoneDeJeu();
-//				System.out.println("Deposer carte 25 km");
-//				zoneDeJeu.deposer(new Borne(25));
-//				System.out.println("Deposer carte 50 km");
-//				zoneDeJeu.deposer(new Borne(50));
-//				System.out.println("Deposer carte 75 km");
-//				zoneDeJeu.deposer(new Borne(75));
-//				System.out.println("Total des bornes : " + zoneDeJeu.donnerKmParcourus());
-//		
-//				System.out.println("Limite : " + zoneDeJeu.donnerLimitationVitesse());
-//				zoneDeJeu.deposer(new DebutLimite());
-//				System.out.println("Limite : " + zoneDeJeu.donnerLimitationVitesse());
-//				zoneDeJeu.deposer(new FinLimite());
-//				System.out.println("Limite : " + zoneDeJeu.donnerLimitationVitesse());
+				System.out.println("Deposer carte 25 km");
+				zoneDeJeu.deposer(new Borne(25));
+				System.out.println("Deposer carte 50 km");
+				zoneDeJeu.deposer(new Borne(50));
+				System.out.println("Deposer carte 75 km");
+				zoneDeJeu.deposer(new Borne(75));
+				System.out.println("Total des bornes : " + zoneDeJeu.donnerKmParcourus());
+		
+				System.out.println("Limite : " + zoneDeJeu.donnerLimitationVitesse());
+				zoneDeJeu.deposer(new DebutLimite());
+				System.out.println("Limite : " + zoneDeJeu.donnerLimitationVitesse());
+				zoneDeJeu.deposer(new FinLimite());
+				System.out.println("Limite : " + zoneDeJeu.donnerLimitationVitesse());
 
 //		 TP3 PARTIE 3
 //				boolean depotOK = false;
@@ -258,6 +258,7 @@ public class TestZoneDeJeu {
 					zoneDeJeu.deposer(new DebutLimite());
 				}
 				System.out.println("peut avancer ? " + zoneDeJeu.peutAvancer());
+				
 
 		// RESULTAT ATTENDU POUR LE TP4 Partie 1
 //				Deposer carte Feu rouge

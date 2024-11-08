@@ -21,7 +21,5 @@ public class Botte extends Probleme {
 		}
 		return false;
 	}
-	
-	
-	
+
 }

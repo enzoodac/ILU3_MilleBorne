@@ -14,7 +14,7 @@ public abstract class Probleme extends Carte {
 	}
 	@Override
 	public int hashCode() {
-		return getClass().hashCode() + getType().hashCode();
+		return getType().hashCode() + super.hashCode();
 	}
 	@Override
 	public boolean equals(Object obj) {
