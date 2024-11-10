@@ -71,10 +71,13 @@ public class Joueur {
 	public HashSet<Coup> coupsPossibles(Set<Joueur> participants) {
 		HashSet<Coup> setCoups = new HashSet<>();
 		for (Joueur partcicipant : participants) {
-			for (Carte carte : main) {
-				Coup coup = new Coup(this, partcicipant, carte);
-				if (coup.estValide()) {
-					setCoups.add(coup);
+			if (!partcicipant.equals(this)) {
+				for (Carte carte : main) {
+
+					Coup coup = new Coup(this, partcicipant, carte);
+					if (coup.estValide()) {
+						setCoups.add(coup);
+					}
 				}
 			}
 

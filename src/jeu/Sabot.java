@@ -17,6 +17,7 @@ public class Sabot<T extends Carte> implements Iterable<T> {
 		// this.cartes = jeu.donnerCartes();
 
 		this.cartes = jeu.donnerCartes();
+		
 		this.nbCartes = cartes.length;
 	}
 
