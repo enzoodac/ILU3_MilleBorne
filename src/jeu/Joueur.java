@@ -12,11 +12,11 @@ public class Joueur {
 	private ZoneDeJeu zoneDeJeu;
 	private MainJoueur main;
 
-	public Joueur(String nom, ZoneDeJeu zoneDeJeu) {
+	public Joueur(String nom) {
 		super();
 		this.nom = nom;
 		this.main = new MainJoueur();
-		this.zoneDeJeu = zoneDeJeu;
+		this.zoneDeJeu = new ZoneDeJeu();
 	}
 
 	public String getNom() {
@@ -47,14 +47,14 @@ public class Joueur {
 		main.prendre(carte);
 	}
 
-	public Carte prendreCarte(Sabot sabot) {
+	public Carte prendreCarte(Sabot<Carte> sabot) {
 
 		if (sabot.estVide()) {
-
 			return null;
 		}
 
 		Carte carte = sabot.piocher();
+
 		donner(carte);
 		return carte;
 	}
@@ -70,11 +70,14 @@ public class Joueur {
 
 	public HashSet<Coup> coupsPossibles(Set<Joueur> participants) {
 		HashSet<Coup> setCoups = new HashSet<>();
+		int nbCoupsValide = 0;
 		for (Joueur partcicipant : participants) {
-			for (Carte carte : main) {
-				Coup coup = new Coup(this, partcicipant, carte);
-				if (coup.estValide()) {
-					setCoups.add(coup);
+			if (!partcicipant.equals(this)) {
+				for (Carte carte : main) {
+					Coup coup = new Coup(this, partcicipant, carte);
+					if (coup.estValide()) {
+						setCoups.add(coup);
+					}
 				}
 			}
 

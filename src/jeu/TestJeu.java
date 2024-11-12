@@ -7,13 +7,10 @@ public class TestJeu {
 
 	public static void main(String[] args) {
 		Jeu jeu = new Jeu();
-		ZoneDeJeu zoneJack = new ZoneDeJeu();
-		ZoneDeJeu zoneBill = new ZoneDeJeu();
-		ZoneDeJeu zoneLuffy = new ZoneDeJeu();
-
-		Joueur jack = new Joueur("Jack", zoneJack);
-		Joueur bill = new Joueur("Bill", zoneBill);
-		Joueur luffy = new Joueur("Luffy", zoneLuffy);
+	
+		Joueur jack = new Joueur("Jack");
+		Joueur bill = new Joueur("Bill");
+		Joueur luffy = new Joueur("Luffy");
 		
 		jeu.inscrire(jack, bill, luffy);
 		jeu.distribuerCartes();

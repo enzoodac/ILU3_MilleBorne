@@ -11,25 +11,25 @@ import java.util.Arrays;
 import java.util.HashSet;
 
 public class Jeu {
-	Sabot sabot;
+	Sabot<Carte> sabot;
 	Set<Joueur> joueurs;
-	final int NBCARTES = 6;
+	final int NBCARTES = 8;
 
 	public Jeu() {
 		JeuDeCartes jeuDeCartes = new JeuDeCartes();
 		List<Carte> listeCartes = new ArrayList<>(Arrays.asList(jeuDeCartes.donnerCartes()));
-		GestionCartes.melanger(listeCartes);
+		listeCartes = GestionCartes.melanger(listeCartes);
+		Carte[] tabCartesMelangees = new Carte[listeCartes.size()];
+		int numCarte=0;
+		for (Carte carte : listeCartes) {
+			tabCartesMelangees[numCarte] = carte;
+			numCarte++;
+		}
+	
 		joueurs = new HashSet<>();
-		sabot = new Sabot();
+		sabot = new Sabot<Carte>(tabCartesMelangees);
 		
-		Carte[] cartesMelangees = listeCartes.toArray(new Carte[0]);
-		for (int i = 0; i < cartesMelangees.length; i++) {
-			System.out.println(listeCartes.get(i).toString());
-		}
-		for (Carte carte : cartesMelangees) {
-			System.out.println("carte == " + carte.toString());
-			sabot.ajouterCarte(carte);
-		}
+		
 	}
 
 	public void inscrire(Joueur... joueursAInscricre) {
@@ -39,8 +39,9 @@ public class Jeu {
 	}
 
 	public void distribuerCartes() {
-		for (int i = 0; i < NBCARTES; i++) {
+		for (int i = 1; i < NBCARTES; i++) {
 			for (Joueur joueur : joueurs) {
+				
 				joueur.prendreCarte(sabot);
 			}
 		}
@@ -50,7 +51,7 @@ public class Jeu {
 		StringBuilder chaine = new StringBuilder();
 		Carte carte = joueur.prendreCarte(sabot);
 		chaine.append(
-				"Le joueur " + joueur.getNom() + " a pioche " + carte.toString() + "\n" + joueur.getMain().toString() + "\n");
+				"Le joueur " + joueur.getNom() + " a pioche " + carte.toString() + "\n" + joueur.getMain().toString());
 		chaine.append(joueur.getNom() + " depose la carte " + carte.toString() + " dans ");
 		Coup coup = joueur.choisirCoup(joueurs);
 		joueur.retirerDeLaMain(carte);
@@ -61,7 +62,7 @@ public class Jeu {
 
 		} else {
 			joueurCible.deposer(carte);
-			chaine.append("dans la zone de jeu de " + joueurCible.getNom());
+			chaine.append("la zone de jeu de " + joueurCible.getNom() + "\n");
 		}
 		System.out.println(chaine.toString());
 		return chaine.toString();

@@ -12,11 +12,11 @@ public class Sabot<T extends Carte> implements Iterable<T> {
 	private Carte[] cartes;
 	private int nombreOperations = 0;
 
-	public Sabot() {
+	public Sabot(Carte [] cartes) {
 		JeuDeCartes jeu = new JeuDeCartes();
 		// this.cartes = jeu.donnerCartes();
 
-		this.cartes = jeu.donnerCartes();
+		this.cartes = cartes;
 		this.nbCartes = cartes.length;
 	}
 
