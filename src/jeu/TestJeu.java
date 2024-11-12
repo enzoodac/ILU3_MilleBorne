@@ -14,9 +14,7 @@ public class TestJeu {
 		
 		jeu.inscrire(jack, bill, luffy);
 		jeu.distribuerCartes();
-		jeu.jouerTour(jack);
-		jeu.jouerTour(bill);
-		jeu.jouerTour(luffy);
+		jeu.lancer();
 		
 
 	}

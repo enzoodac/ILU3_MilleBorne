@@ -29,10 +29,17 @@ public class Coup {
 
 	public boolean estValide() {
 
-		if (carteJouee instanceof Attaque || carteJouee instanceof DebutLimite && joueurCible == null) {
-			return false;
-		} 
-		return true;
+		boolean cond1 = !(carteJouee instanceof Attaque || carteJouee instanceof DebutLimite && joueurCible == null);
+		boolean cond2 = true;
+		if (carteJouee instanceof Borne) {
+
+			Borne borne = (Borne) carteJouee;
+			int km = borne.getKm();
+			cond2 = joueurCourant.getZoneDeJeu().donnerKmParcourus() + km <= 1000;
+		}
+
+		return cond1 && cond2;
+
 	}
 
 	@Override

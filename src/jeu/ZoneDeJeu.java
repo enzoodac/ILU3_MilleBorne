@@ -49,7 +49,7 @@ public class ZoneDeJeu {
 		for (Borne borne : bornes) {
 			parcouru += borne.getKm();
 		}
-		System.out.println("Total des bornes : " + parcouru);
+		//System.out.println("Total des bornes : " + parcouru);
 		return parcouru;
 	}
 
