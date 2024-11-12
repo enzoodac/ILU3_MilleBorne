@@ -9,27 +9,32 @@ import java.util.ListIterator;
 import java.util.List;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Iterator;
 
 public class Jeu {
 	Sabot sabot;
 	Set<Joueur> joueurs;
 	final int NBCARTES = 6;
+	private Carte[] cartesMelangees;
 
 	public Jeu() {
 		JeuDeCartes jeuDeCartes = new JeuDeCartes();
 		List<Carte> listeCartes = new ArrayList<>(Arrays.asList(jeuDeCartes.donnerCartes()));
-		GestionCartes.melanger(listeCartes);
+
+		
+		List<Carte> listeCartesMelangee = GestionCartes.melanger(listeCartes);
+		
 		joueurs = new HashSet<>();
 		sabot = new Sabot();
 		
-		Carte[] cartesMelangees = listeCartes.toArray(new Carte[0]);
-		for (int i = 0; i < cartesMelangees.length; i++) {
-			System.out.println(listeCartes.get(i).toString());
+		 cartesMelangees = new Carte[listeCartesMelangee.size()];
+		 for (int i = 0; i < cartesMelangees.length; i++) {
+			 cartesMelangees[i] = listeCartesMelangee.get(i);
 		}
-		for (Carte carte : cartesMelangees) {
-			System.out.println("carte == " + carte.toString());
-			sabot.ajouterCarte(carte);
-		}
+		
+		
+	
+		
 	}
 
 	public void inscrire(Joueur... joueursAInscricre) {
@@ -39,9 +44,12 @@ public class Jeu {
 	}
 
 	public void distribuerCartes() {
+		int numCarte = 0;
 		for (int i = 0; i < NBCARTES; i++) {
 			for (Joueur joueur : joueurs) {
-				joueur.prendreCarte(sabot);
+				
+				joueur.donner(cartesMelangees[numCarte]);
+				numCarte++;//Donner!!!
 			}
 		}
 	}
@@ -49,14 +57,14 @@ public class Jeu {
 	public String jouerTour(Joueur joueur) {
 		StringBuilder chaine = new StringBuilder();
 		Carte carte = joueur.prendreCarte(sabot);
-		chaine.append(
-				"Le joueur " + joueur.getNom() + " a pioche " + carte.toString() + "\n" + joueur.getMain().toString() + "\n");
+		chaine.append("Le joueur " + joueur.getNom() + " a pioche " + carte.toString() + "\n"
+				+ joueur.getMain().toString() + "\n");
 		chaine.append(joueur.getNom() + " depose la carte " + carte.toString() + " dans ");
 		Coup coup = joueur.choisirCoup(joueurs);
 		joueur.retirerDeLaMain(carte);
 		Joueur joueurCible = coup.getJoueurCible();
 		if (joueurCible == null) {
-			sabot.ajouterCarte(carte);
+			sabot.ajouterCarte(carte);					//Warning
 			chaine.append("sa zone de jeu\n");
 
 		} else {
