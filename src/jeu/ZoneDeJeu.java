@@ -49,7 +49,7 @@ public class ZoneDeJeu {
 		for (Borne borne : bornes) {
 			parcouru += borne.getKm();
 		}
-		//System.out.println("Total des bornes : " + parcouru);
+		// System.out.println("Total des bornes : " + parcouru);
 		return parcouru;
 	}
 
@@ -64,12 +64,12 @@ public class ZoneDeJeu {
 
 		case Limite limite:
 			limites.addFirst(limite);
-			
+
 			break;
 
 		case Bataille bataille:
 			batailles.addFirst(bataille);
-	
+
 			break;
 		case Botte botte:
 			bottes.add(botte);
@@ -116,8 +116,10 @@ public class ZoneDeJeu {
 	}
 
 	private boolean estDepotBorneAutorise(Borne borne) {
-		return peutAvancer() && borne.getKm() <= donnerLimitationVitesse()
+		boolean auto = peutAvancer() && borne.getKm() <= donnerLimitationVitesse()
 				&& donnerKmParcourus() + borne.getKm() <= 1000;
+		System.out.println("estDepotBorneAutorise(" + borne.toString() +") = " + auto);
+		return auto;
 	}
 
 	private boolean estDepotLimiteAutorise(Limite limite) {
@@ -127,7 +129,7 @@ public class ZoneDeJeu {
 		}
 		switch (limite) {
 		case DebutLimite debutLimite -> cond = limites.isEmpty() || limites.getFirst() instanceof FinLimite;
-		case FinLimite finLimite -> cond = limites.getFirst() instanceof DebutLimite;
+		case FinLimite finLimite -> cond = !limites.isEmpty() && limites.getFirst() instanceof DebutLimite;
 
 		default -> throw new IllegalArgumentException("Unexpected value: " + limite);
 		}

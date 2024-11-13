@@ -19,6 +19,10 @@ public class Sabot<T extends Carte> implements Iterable<T> {
 		this.cartes = cartes;
 		this.nbCartes = cartes.length;
 	}
+	
+	public int getNbCartes() {
+		return nbCartes;
+	}
 
 	public boolean estVide() {
 		return nbCartes == 0;

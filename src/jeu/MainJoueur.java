@@ -37,7 +37,7 @@ public class MainJoueur implements Iterable<Carte> {
 			chaine.append(carte.toString() + ", ");
 		}
 		
-		//supprimer les deux deniers cactères
+		//supprimer les deux deniers cactères : ", "
 		chaine.delete(chaine.length()-2, chaine.length());
 		chaine.append("]\n");
 		return chaine.toString();

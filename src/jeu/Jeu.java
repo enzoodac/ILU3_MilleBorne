@@ -81,7 +81,9 @@ public class Jeu {
 	public void lancer() {
 		do {
 			for (Joueur joueur : joueurs) {
-
+				if(!sabot.estVide()) {
+					
+				}
 				StringBuilder chaine = new StringBuilder();
 				Carte carte = joueur.prendreCarte(sabot);
 				chaine.append("Le joueur " + joueur.getNom() + " a pioche " + carte.toString() + "\n"
@@ -102,9 +104,10 @@ public class Jeu {
 				for (Joueur joueura : joueurs) {
 					System.out.println("Total des bornes " + joueura.getNom() + " : " + joueura.donnerKmParcourus());
 				}
+				System.out.println("\n");
 			}
 
-		} while (Gagnant() == null);
+		} while (Gagnant() == null && sabot.getNbCartes()>=joueurs.size());
 
 	}
 

@@ -69,7 +69,13 @@ public class Joueur {
 	}
 
 	public void deposer(Carte c) {
+
 		zoneDeJeu.deposer(c);
+
+	}
+
+	public boolean estDepotAutorise(Carte c) {
+		return zoneDeJeu.estDepotAutorise(c);
 	}
 
 	public HashSet<Coup> coupsPossibles(Set<Joueur> participants) {
