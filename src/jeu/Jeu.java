@@ -1,15 +1,22 @@
 package jeu;
 
 import java.util.Iterator;
+import java.io.*;
+import java.lang.*;
+import java.util.*;
 
 import cartes.*;
 import java.util.ArrayList;
 import java.util.Set;
+import java.util.TreeSet;
+
 import utils.GestionCartes;
 
 import java.util.ListIterator;
 import java.util.List;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.Comparator;
 import java.util.HashSet;
 
 public class Jeu {
@@ -81,8 +88,8 @@ public class Jeu {
 	public void lancer() {
 		do {
 			for (Joueur joueur : joueurs) {
-				if(!sabot.estVide()) {
-					
+				if (!sabot.estVide()) {
+
 				}
 				StringBuilder chaine = new StringBuilder();
 				Carte carte = joueur.prendreCarte(sabot);
@@ -107,7 +114,7 @@ public class Jeu {
 				System.out.println("\n");
 			}
 
-		} while (Gagnant() == null && sabot.getNbCartes()>=joueurs.size());
+		} while (Gagnant() == null && sabot.getNbCartes() >= joueurs.size());
 
 	}
 
@@ -121,6 +128,23 @@ public class Jeu {
 
 		}
 		return null;
+	}
+
+	public Set<Joueur> classement() {
+		NavigableSet<Joueur> classement = new TreeSet<>(new JoueurCompareKm());
+		for (Joueur joueur : joueurs) {
+			classement.add(joueur);
+		}
+
+		return classement;
+	}
+
+	private static class JoueurCompareKm implements Comparator<Joueur> {
+		@Override
+		public int compare(Joueur j1, Joueur j2) {
+			return j1.donnerKmParcourus() - j2.donnerKmParcourus();
+
+		}
 	}
 
 }

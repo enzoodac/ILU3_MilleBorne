@@ -35,7 +35,7 @@ public class Coup {
 
 			Borne borne = (Borne) carteJouee;
 			int km = borne.getKm();
-			cond2 = joueurCourant.getZoneDeJeu().donnerKmParcourus() + km <= 1000;
+			cond2 = joueurCourant.estDepotAutorise(borne);
 		}
 
 		return cond1 && cond2;

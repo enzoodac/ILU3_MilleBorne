@@ -38,6 +38,10 @@ public class Joueur {
 		return false;
 	}
 
+//	public boolean estDepotAutorise1(Carte c) {
+//		return zoneDeJeu.estDepotAutorise(c);
+//	}
+
 	@Override
 	public String toString() {
 		return nom;
