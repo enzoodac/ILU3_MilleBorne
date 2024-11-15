@@ -87,34 +87,33 @@ public class Jeu {
 
 	public void lancer() {
 		do {
-			for (Joueur joueur : joueurs) {
-				if (!sabot.estVide()) {
 
-				}
-				StringBuilder chaine = new StringBuilder();
-				Carte carte = joueur.prendreCarte(sabot);
-				chaine.append("Le joueur " + joueur.getNom() + " a pioche " + carte.toString() + "\n"
-						+ joueur.getMain().toString());
-				chaine.append(joueur.getNom() + " depose la carte " + carte.toString() + " dans ");
-				Coup coup = joueur.choisirCoup(joueurs);
-				joueur.retirerDeLaMain(carte);
-				Joueur joueurCible = coup.getJoueurCible();
-				if (joueurCible == null) {
-					sabot.ajouterCarte(carte);
-					chaine.append("sa zone de jeu\n");
+			Joueur joueur = donnerJoueurSuivant();
+			StringBuilder chaine = new StringBuilder();
+			Carte carte = joueur.prendreCarte(sabot);
+			chaine.append("Le joueur " + joueur.getNom() + " a pioche " + carte.toString() + "\n"
+					+ joueur.getMain().toString());
+			chaine.append(joueur.getNom() + " depose la carte " + carte.toString() + " dans ");
+			Coup coup = joueur.choisirCoup(joueurs);
+			joueur.retirerDeLaMain(carte);
+			Joueur joueurCible = coup.getJoueurCible();
+			if (joueurCible == null) {
+				sabot.ajouterCarte(carte);
+				chaine.append("sa zone de jeu\n");
 
-				} else {
-					joueurCible.deposer(carte);
-					chaine.append("la zone de jeu de " + joueurCible.getNom() + "\n");
-				}
-				System.out.println(chaine.toString());
-				for (Joueur joueura : joueurs) {
-					System.out.println("Total des bornes " + joueura.getNom() + " : " + joueura.donnerKmParcourus());
-				}
-				System.out.println("\n");
+			} else {
+				joueurCible.deposer(carte);
+				chaine.append("la zone de jeu de " + joueurCible.getNom() + "\n");
 			}
+			System.out.println(chaine.toString());
+			for (Joueur joueura : joueurs) {
+				System.out.println("Total des bornes " + joueura.getNom() + " : " + joueura.donnerKmParcourus());
+			}
+			System.out.println("\n");
 
-		} while (Gagnant() == null && sabot.getNbCartes() >= joueurs.size());
+		} while (!sabot.estVide());
+		Gagnant();
+		System.out.println(classement());
 
 	}
 
@@ -131,7 +130,7 @@ public class Jeu {
 	}
 
 	public Set<Joueur> classement() {
-		NavigableSet<Joueur> classement = new TreeSet<>(new JoueurCompareKm());
+		Set<Joueur> classement = new TreeSet<>(new JoueurCompareKm());
 		for (Joueur joueur : joueurs) {
 			classement.add(joueur);
 		}
@@ -142,7 +141,7 @@ public class Jeu {
 	private static class JoueurCompareKm implements Comparator<Joueur> {
 		@Override
 		public int compare(Joueur j1, Joueur j2) {
-			return j1.donnerKmParcourus() - j2.donnerKmParcourus();
+			return Integer.compare(j2.donnerKmParcourus(), j1.donnerKmParcourus());
 
 		}
 	}

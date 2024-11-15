@@ -1,22 +1,59 @@
 package jeu;
 
 import cartes.*;
+import strategies.*;
+import strategies.Strategie.DefaultSort;
+
 import java.util.Random;
 import jeu.Coup;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.NavigableSet;
 import java.util.Set;
+import java.util.TreeSet;
 
-public class Joueur {
+public class Joueur implements Comparable<Joueur> {
 	private String nom;
 	private ZoneDeJeu zoneDeJeu;
 	private MainJoueur main;
+	private Strategie strategie;
 
 	public Joueur(String nom) {
 		super();
 		this.nom = nom;
 		this.main = new MainJoueur();
 		this.zoneDeJeu = new ZoneDeJeu();
+		strategie = new Strategie() {
+			@Override
+			public NavigableSet<Coup> trierCoups(Set<Coup> coupsATrier) {
+				assert (!coupsATrier.isEmpty());
+				NavigableSet<Coup> coupsTries = new TreeSet<>(new DefaultSort());
+				coupsTries.addAll(coupsATrier);
+
+				return coupsTries;
+			}
+
+			@Override
+			public Coup selectionnerCoup(Set<Coup> choixCoups) {
+				return trierCoups(choixCoups).last();
+			}
+
+			@Override
+			public Coup selectionnerDefausse(Set<Coup> choixCoups) {
+				return trierCoups(choixCoups).first();
+			}
+		};
+	}
+
+	@Override
+	public int compareTo(Joueur joueurToCompare) {
+		int kmComparaison;
+
+		if ((kmComparaison = Integer.compare(donnerKmParcourus(), joueurToCompare.donnerKmParcourus())) != 0) {
+			return kmComparaison;
+		} else {
+			return nom.compareTo(joueurToCompare.getNom());
+		}
 	}
 
 	public String getNom() {
@@ -25,6 +62,10 @@ public class Joueur {
 
 	public MainJoueur getMain() {
 		return main;
+	}
+
+	public void setStrategie(Strategie strategie) {
+		this.strategie = strategie;
 	}
 
 	@Override
@@ -133,10 +174,12 @@ public class Joueur {
 		Set<Coup> coupsPossibles = coupsPossibles(participants);
 		Set<Coup> coupsDefausse = coupsDefausse();
 		if (coupsPossibles.isEmpty()) {
-			return choixRandom(coupsDefausse);
+			System.out.println("1");
+			return strategie.selectionnerCoup(coupsDefausse);
 
 		} else {
-			return choixRandom(coupsPossibles);
+			// System.out.println("2");
+			return strategie.selectionnerDefausse(coupsPossibles);
 		}
 	}
 

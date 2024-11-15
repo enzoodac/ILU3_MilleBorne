@@ -118,7 +118,7 @@ public class ZoneDeJeu {
 	private boolean estDepotBorneAutorise(Borne borne) {
 		boolean auto = peutAvancer() && borne.getKm() <= donnerLimitationVitesse()
 				&& donnerKmParcourus() + borne.getKm() <= 1000;
-		System.out.println("estDepotBorneAutorise(" + borne.toString() +") = " + auto);
+		//System.out.println("estDepotBorneAutorise(" + borne.toString() +") = " + auto);
 		return auto;
 	}
 

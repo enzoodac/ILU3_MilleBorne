@@ -26,4 +26,8 @@ public enum Type {
 		return nomParade;
 	}
 
+	public int compareByFirstLetter(Type typeToCompare) {
+		return Character.compare(this.name().charAt(0), typeToCompare.name().charAt(0));
+	}
+
 }
